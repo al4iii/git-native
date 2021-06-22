@@ -55,12 +55,24 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
-export const setUserProfile = (userProfile) => ({ type: SET_USERS, userProfile });
+export const setUserProfile = (userProfile) => ({
+  type: SET_USERS,
+  userProfile,
+});
 export const setRepos = (repos) => ({ type: SET_REPOS, repos });
 export const setUserName = (userName) => ({ type: SET_USER_NAME, userName });
-export const toggleIsFetching = (isFetching) => ({ type: TOGGELE_IS_FETCHING, isFetching });
-export const setTotalReposCount = (totalCount) => ({ type: SET_TOTAL_COUNT, totalCount });
-export const setCurrentPages = (currentPage) => ({ type: SET_CURRENT_PAGE, currentPage });
+export const toggleIsFetching = (isFetching) => ({
+  type: TOGGELE_IS_FETCHING,
+  isFetching,
+});
+export const setTotalReposCount = (totalCount) => ({
+  type: SET_TOTAL_COUNT,
+  totalCount,
+});
+export const setCurrentPages = (currentPage) => ({
+  type: SET_CURRENT_PAGE,
+  currentPage,
+});
 export const setIsFound = (isFound) => ({ type: SET_IS_FOUND, isFound });
 
 export const getUsers = (user) => async (dispatch) => {
@@ -81,14 +93,19 @@ export const getUsers = (user) => async (dispatch) => {
   }
 };
 
-export const getRepos = ( currentPage, pageSize = initialState.pageSize, user = initialState.userName
-  ) => async (dispatch) => {
-  dispatch(toggleIsFetching(true));
-  dispatch(setCurrentPages(currentPage));
-  let response = await usersAPI.getRepos(currentPage, pageSize, user);
-  dispatch(setRepos(response));
-  dispatch(toggleIsFetching(false));
-};
+export const getRepos =
+  (
+    currentPage,
+    pageSize = initialState.pageSize,
+    user = initialState.userName
+  ) =>
+  async (dispatch) => {
+    dispatch(toggleIsFetching(true));
+    dispatch(setCurrentPages(currentPage));
+    let response = await usersAPI.getRepos(currentPage, pageSize, user);
+    dispatch(setRepos(response));
+    dispatch(toggleIsFetching(false));
+  };
 
 export const getReposLength = (userName) => async (dispatch) => {
   let response = await usersAPI.getReposLength(userName);

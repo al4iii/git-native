@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Provider } from "react-redux";
 import Content from "./components/Content";
 import Navbar from "./components/Navbar";
@@ -10,7 +10,7 @@ export default function App() {
     <Provider store={store}>
       <View style={styles.container}>
         <Navbar style={styles.navbar} />
-        <Content style={styles.content}/>
+        <Content style={styles.content} />
       </View>
     </Provider>
   );
@@ -18,16 +18,14 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,    
+    marginTop: 30,
     backgroundColor: "#fff",
     alignItems: "center",
     justifyContent: "center",
   },
   navbar: {
-    marginBottom: 50,    
+    marginBottom: 50,
     alignItems: "flex-start",
   },
-  content:{
-    
-  }
+  content: {},
 });

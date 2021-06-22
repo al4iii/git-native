@@ -2,36 +2,27 @@ import React, { useState } from "react";
 import { StyleSheet, View, TextInput, Button, Image } from "react-native";
 import { useDispatch } from "react-redux";
 import { getUsers } from "../redux/users-reduser";
+import logo from "../img/vector.png";
 
 const Navbar = () => {
   const dispatch = useDispatch();
   let [user, setUser] = useState("");
-  const onStatusChenge = (e) => setUser(e.currentTarget.value);
   const searchUser = () => {
     dispatch(getUsers(user));
-    console.log(user)
+    console.log(user);
     setUser("");
   };
   return (
     <View style={styles.navbar}>
-      <Image
-        style={styles.tinyLogo}
-        source={{
-          uri: "https://w7.pngwing.com/pngs/800/537/png-transparent-github-webhook-computer-icons-logo-github-mammal-cat-like-mammal-carnivoran.png",
-        }}
-      />
+      <Image style={styles.tinyLogo} source={logo} />
       <TextInput
         placeholder="enter user name"
         autoCorrect={false}
         style={styles.input}
-        onChange={onStatusChenge}
+        onChangeText={setUser}
         value={user}
       />
-      <Button
-        title="Search"
-        style={styles.button}
-        onPress={searchUser}
-      />
+      <Button title="Search" style={styles.button} onPress={searchUser} />
     </View>
   );
 };

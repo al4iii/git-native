@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, TextInput, Button, Image, Text } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import Preloader from "./Preloader";
 import { useSelector } from "react-redux";
 import { isFetchingSelector, isFoundSelector, userNameSelector } from "../redux/users-selector";
@@ -14,17 +14,18 @@ const UserProfile = () => {
       {isFetching ? (
         <Preloader />
       ) : !isFound ? (
-        <View style={styles.not_found}>
+        <View style={styles.notFound}>
           <Text> User "{user}" not Found </Text>
         </View>
       ) : (
-        // <User />
-       null
+        <User />
       )}
     </View>
   );
 };
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  notFound: {},
+});
 
 export default UserProfile;

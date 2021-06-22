@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { StyleSheet, View, TextInput, Button, Image, Text } from "react-native";
+import React from "react";
+import { StyleSheet, View, Text } from "react-native";
 import { useSelector } from "react-redux";
 import { userProfileSelector } from "../redux/users-selector";
 import UserProfile from "./UserProfile";
