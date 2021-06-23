@@ -18,14 +18,15 @@ export default function App() {
 
 const styles = StyleSheet.create({
   container: {
-    marginTop: 30,
+    flex: 1,
+    marginTop: 28,
     backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
   },
   navbar: {
-    marginBottom: 50,
-    alignItems: "flex-start",
+    flex: 0.3,
   },
-  content: {},
+  content: {
+    flex: 0.7,
+  },
+  button: {},
 });

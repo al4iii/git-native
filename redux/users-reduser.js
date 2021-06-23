@@ -7,6 +7,7 @@ const SET_IS_FOUND = "users/SET_IS_FOUND";
 const SET_USER_NAME = "users/SET_USER_NAME";
 const SET_TOTAL_COUNT = "users/SET_TOTAL_COUNT";
 const SET_CURRENT_PAGE = "users/SET_CURRENT_PAGE";
+const REMOVE_USER = "users/REMOVE_USERS";
 
 let initialState = {
   userName: null,
@@ -50,6 +51,18 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFound: action.isFound,
       };
+    case REMOVE_USER:
+      return {
+        ...state,
+        userName: "000",
+        userProfile: null,
+        repos: [],
+        toggleIsFetching: false,
+        pageSize: 4,
+        totalCount: 0,
+        currentPage: 1,
+        isFound: null,
+      };
     default:
       return state;
   }
@@ -59,6 +72,7 @@ export const setUserProfile = (userProfile) => ({
   type: SET_USERS,
   userProfile,
 });
+export const removeUser = () => ({ type: REMOVE_USER });
 export const setRepos = (repos) => ({ type: SET_REPOS, repos });
 export const setUserName = (userName) => ({ type: SET_USER_NAME, userName });
 export const toggleIsFetching = (isFetching) => ({
@@ -87,6 +101,7 @@ export const getUsers = (user) => async (dispatch) => {
     dispatch(getRepos(currentPage, pageSize, user));
     dispatch(getReposLength(user));
     dispatch(setCurrentPages(currentPage));
+    dispatch(toggleIsFetching(false));
   } else if (response.status === 404) {
     dispatch(setIsFound(false));
     dispatch(toggleIsFetching(false));

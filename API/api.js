@@ -15,7 +15,7 @@ export const usersAPI = {
   },
   getRepos: (currentPage, pageSize, user) => {
     return instanse
-      .get(`users/${user}/repos?page=${currentPage}&per_page=${pageSize}`)
+      .get(`users/${user}/repos`)
       .then((response) => response.data);
   },
   getReposLength: (user) => {

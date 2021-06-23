@@ -1,9 +1,14 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { StyleSheet, View, Image, Text } from "react-native";
-import { getRepos } from "../redux/users-reduser";
-import { currentPageSelector, pageSizeSelector, reposSelector,
-  totalCountSelector, userNameSelector, userProfileSelector } from "../redux/users-selector";
+import { StyleSheet, View, Image, Text, ScrollView } from "react-native";
+import {
+  currentPageSelector,
+  pageSizeSelector,
+  reposSelector,
+  totalCountSelector,
+  userNameSelector,
+  userProfileSelector,
+} from "../redux/users-selector";
 import Repos from "./Repos";
 
 const User = () => {
@@ -12,32 +17,33 @@ const User = () => {
   const profile = useSelector(userProfileSelector);
   const repos = useSelector(reposSelector);
   // const pageSize = useSelector(pageSizeSelector);
-  // const currentPage = useSelector(currentPageSelector);  
+  // const currentPage = useSelector(currentPageSelector);
   // const onPageChenged = (pageNumber, page) => {
   //   const login = profile.login;
   //   dispatch(getRepos(pageNumber, page, login));
-  // };  
-  // let userName = useSelector(userNameSelector); 
+  // };
+  // let userName = useSelector(userNameSelector);
   return (
-    <View>
-      <View>
-        <View>
+    <View style={styles.conteiner}>
+      <View style={styles.profile}>
+        <View style={styles.avatar}>
           <Image
-            style={styles.tinyLogo}
+            style={styles.logo}
             source={{
               uri: profile.avatar_url,
             }}
           />
-          <View style={styles.name}>
-            <Text>{profile.name}</Text>
-          </View>
-          <View style={styles.login}>
-            <Text>{profile.login}</Text>
-          </View>
-          <View style={styles.followers}>
-            <Text>{profile.followers} followers</Text>
-            <Text>{profile.following} following</Text>
-          </View>
+        </View>
+        <View style={styles.name}>
+          <Text style={styles.text}>{profile.name}</Text>
+        </View>
+        <View style={styles.login}>
+          <Text>Login: {profile.login}</Text>
+        </View>
+        <View style={styles.followers}>
+          <Text>
+            {profile.followers} followers {profile.following} following
+          </Text>
         </View>
       </View>
       <View>
@@ -45,16 +51,22 @@ const User = () => {
           {totalItemsCount === 0 ? (
             <Text> </Text>
           ) : (
-            <Text>Repositories({totalItemsCount})</Text>
+            <View style={styles.repos}>
+              <Text style={styles.text}>Repositories({totalItemsCount})</Text>
+            </View>
           )}
         </View>
         <View style={styles.rep}>
           {totalItemsCount === 0 ? (
-            <>
+            <View style={styles.repos}>
               <Text>Repository list is emply</Text>
-            </>
+            </View>
           ) : (
-            repos.map((rep) => <Repos key={rep.id} rep={rep} />)
+            <ScrollView>
+              {repos.map((rep) => (
+                <Repos key={rep.id} rep={rep} />
+              ))}
+            </ScrollView>
           )}
         </View>
       </View>
@@ -66,16 +78,41 @@ const styles = StyleSheet.create({
   userprofile: {},
   profile: {},
   img: {},
-  name: {},
-  login: {},
-  followers: {},
-  rep: {},
-  tinyLogo: {
+  name: {
+    width: "100%",
+    height: 20,
+    marginVertical: 5,
+    alignItems: "center",
+  },
+  login: {
+    width: "100%",
+    height: 20,
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  followers: {
+    width: "100%",
+    height: 20,
+    alignItems: "center",
+    marginVertical: 5,
+  },
+  repos: {
+    width: "100%",
+    height: 20,
+    alignItems: "center",
+    marginVertical: 15,
+  },
+  logo: {
     width: 70,
     height: 70,
     borderRadius: 50,
-    marginRight: "5%",
-    marginTop: "5%",
+    marginHorizontal: "40%",
+    marginTop: "3%",
+  },
+  conteiner: {},
+  avatar: {},
+  text: {
+    fontSize: 20,
   },
 });
 

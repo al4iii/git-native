@@ -9,12 +9,11 @@ const Navbar = () => {
   let [user, setUser] = useState("");
   const searchUser = () => {
     dispatch(getUsers(user));
-    console.log(user);
     setUser("");
   };
   return (
     <View style={styles.navbar}>
-      <Image style={styles.tinyLogo} source={logo} />
+      <Image style={styles.logo} source={logo} />
       <TextInput
         placeholder="enter user name"
         autoCorrect={false}
@@ -22,7 +21,12 @@ const Navbar = () => {
         onChangeText={setUser}
         value={user}
       />
-      <Button title="Search" style={styles.button} onPress={searchUser} />
+      <Button
+        color="#00BFFF"
+        title="Search"
+        style={styles.button}
+        onPress={searchUser}
+      />
     </View>
   );
 };
@@ -30,24 +34,25 @@ const Navbar = () => {
 const styles = StyleSheet.create({
   navbar: {
     flexDirection: "row",
-    backgroundColor: "#0064EB",
+    backgroundColor: "#1E90FF",
     width: "100%",
-    height: 80,
+    height: 85,
     alignItems: "center",
     justifyContent: "center",
   },
-  tinyLogo: {
+  logo: {
     width: 40,
     height: 40,
     borderRadius: 30,
     marginRight: "5%",
   },
   button: {
-    marginLeft: "5%",
+    color: "#ccc",
   },
   input: {
+    width: "40%",
     borderRadius: 20,
-    backgroundColor: "#fff",
+    backgroundColor: "#FFFAF0",
     marginRight: 10,
     paddingLeft: 10,
   },
